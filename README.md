@@ -4,7 +4,8 @@
 # tmleExtract
 
 The goal of tmleExtract is to extract treatment specific mean estimates
-from TMLE fits produced by the *tmle* package.
+(and the ATE) from TMLE fits produced by the *tmle* package in a tidy
+format.
 
 ## Installation
 
