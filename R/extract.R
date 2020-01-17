@@ -9,7 +9,18 @@
 #' @export
 #'
 #' @examples
-extract_tmle <- function(fit, obs_a, obs_y) {
+#' library(tmleExtract)
+#' library(tmle)
+#'
+#' set.seed(1)
+#' n <- 250
+#' W <- matrix(rnorm(n*3), ncol=3)
+#' A <- rbinom(n,1, 1/(1+exp(-(.2*W[,1] - .1*W[,2] + .4*W[,3]))))
+#' Y <- A + 2*W[,1] + W[,3] + W[,2]^2 + rnorm(n)
+#' tmle_fit <- tmle(Y,A,W, Q.SL.library = "SL.glm", g.SL.library = "SL.glm")
+#'
+#' tmle_extract(tmle_fit, A, Y)
+tmle_extract <- function(fit, obs_a, obs_y) {
   tmle_fit <- fit
   g1w <- tmle_fit$g$g1W
   g0w <- 1 - g1w
@@ -30,7 +41,7 @@ extract_tmle <- function(fit, obs_a, obs_y) {
               IF = IF)
 
   class(out) <- "tmleExtract"
-  return(out)
+  print(out)
 }
 
 get_IF <- function(data) {
@@ -51,7 +62,7 @@ get_IF <- function(data) {
   ate_IF <- IF[[1]] - IF[[2]]
   out <- data.frame(a1_IF = IF[[1]],
                     a0_IF = IF[[2]],
-                    ate_IF = IF)
+                    ate_IF = ate_IF)
   cbind(data, out)
 }
 
