@@ -1,4 +1,14 @@
 
+#' Extract TSM and ATE from a tmle object
+#'
+#' @param fit a TMLE model from the \code{tmle} package
+#' @param obs_a A vector of the observed binary exposures
+#' @param obs_y A vector of the observed outcomes
+#'
+#' @return A list of class \code{tmleExtract} with elements \code{tsm} (the extract estimates) and \code{IF} a dataframe with the elements used to extract such estimates.
+#' @export
+#'
+#' @examples
 extract_tmle <- function(fit, obs_a, obs_y) {
   tmle_fit <- fit
   g1w <- tmle_fit$g$g1W
@@ -69,6 +79,10 @@ tmle_inference <- function(data) {
   purrr::map2_dfr(subs, ifs, inference, .id = "parameter")
 }
 
+#' Print an object of class \code{tmleExtract}
+#'
+#' @param x an object of class \code{tmleExtract}
+#' @export
 print.tmleExtract <- function(x) {
   x$tsm
 }

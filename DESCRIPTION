@@ -13,3 +13,6 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     purrr
+RoxygenNote: 6.1.99.9001
+Depends: 
+    tmle
