@@ -1,13 +1,13 @@
 Package: tmleExtract
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Extract treatment specific mean estimates in a tidy format.
+Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Nick",
+           family = "Willimas",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "niw4001@med.cornell.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Extracts treatment specific mean estimates from TMLE fits from the tmle package in a tidy format.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
