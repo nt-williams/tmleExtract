@@ -19,26 +19,14 @@ Basic example:
 
 ``` r
 library(tmleExtract)
-#> Loading required package: tmle
-#> Loading required package: glmnet
-#> Loading required package: Matrix
-#> Loaded glmnet 3.0-1
-#> Loading required package: SuperLearner
-#> Loading required package: nnls
-#> Super Learner
-#> Version: 2.0-25
-#> Package created on 2019-08-05
-#> Welcome to the tmle package, version 1.4.0.1
-#> 
-#> Use tmleNews() to see details on changes and bug fixes
-library(tmle)
 
 set.seed(1)
 n <- 250
 W <- matrix(rnorm(n*3), ncol=3)
 A <- rbinom(n,1, 1/(1+exp(-(.2*W[,1] - .1*W[,2] + .4*W[,3]))))
 Y <- A + 2*W[,1] + W[,3] + W[,2]^2 + rnorm(n)
-tmle_fit <- tmle(Y,A,W, Q.SL.library = "SL.glm", g.SL.library = "SL.glm")
+tmle_fit <- tmle::tmle(Y,A,W, Q.SL.library = "SL.glm", g.SL.library = "SL.glm")
+#> Loading required package: nnls
 
 tmle_extract(tmle_fit, A, Y)
 #>   parameter estimate   variance standard_error        z            p
