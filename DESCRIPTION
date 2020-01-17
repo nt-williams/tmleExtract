@@ -6,7 +6,7 @@ Authors@R:
            family = "Willimas",
            role = c("aut", "cre"),
            email = "niw4001@med.cornell.edu",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0002-1378-4831"))
 Description: Extracts treatment specific mean estimates from TMLE fits from the tmle package in a tidy format.
 License: MIT + file LICENSE
 Encoding: UTF-8
