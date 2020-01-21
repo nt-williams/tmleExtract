@@ -21,6 +21,7 @@
 #'
 #' tmle_extract(tmle_fit, A, Y)
 tmle_extract <- function(fit, obs_a, obs_y) {
+
   tmle_fit <- fit
   g1w <- tmle_fit$g$g1W
   g0w <- 1 - g1w
@@ -34,14 +35,20 @@ tmle_extract <- function(fit, obs_a, obs_y) {
                     Q0W = Q0W,
                     ATE = Q1W - Q0W)
 
+  if (!is.null(tmle_fit$estimates$RR)) {
+    oob <- purrr::map_dfr(tmle_fit$estimates[c("ATT", "ATC", "RR", "OR")], out_of_box, .id = "parameter")
+  } else {
+    oob <- purrr::map_dfr(tmle_fit$estimates[c("ATT", "ATC")], out_of_box, .id = "parameter")
+  }
+
   IF <- get_IF(use)
   infer <- tmle_inference(IF)
 
-  out <- list(tsm = infer,
+  out <- list(estimates = rbind(infer, oob),
               IF = IF)
 
   class(out) <- "tmleExtract"
-  print(out)
+  return(out)
 }
 
 get_IF <- function(data) {
@@ -64,6 +71,24 @@ get_IF <- function(data) {
                     a0_IF = IF[[2]],
                     ate_IF = ate_IF)
   cbind(data, out)
+}
+
+out_of_box <- function(est) {
+  mu <- est$psi
+  variance <- if (is.null(est$var.psi)) est$var.log.psi else est$var.psi
+  se <- sqrt(variance)
+  z <- if (is.null(est$log.psi)) mu / se else log(mu) / se
+  p <- est$pvalue
+  conf.low <- est$CI[1]
+  conf.high <- est$CI[2]
+
+  data.frame(estimate = mu,
+             variance = variance,
+             standard_error = se,
+             z = z,
+             p = p,
+             conf.low = conf.low,
+             conf.high = conf.high)
 }
 
 inference <- function(qstar, IF) {
@@ -95,5 +120,5 @@ tmle_inference <- function(data) {
 #' @param x an object of class \code{tmleExtract}
 #' @export
 print.tmleExtract <- function(x) {
-  x$tsm
+  print(x$estimates)
 }
