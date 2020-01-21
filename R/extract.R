@@ -23,6 +23,15 @@
 tmle_extract <- function(fit, obs_a, obs_y) {
 
   tmle_fit <- fit
+
+  if (is.null(obs_a)) {
+    infer <- cbind(data.frame(parameter = "EY1"), out_of_box(tmle_fit$estimates$EY1))
+    out <- list(estimates = infer,
+                IF = tmle_fit$estimates$IC$IC.EY1)
+    class(out) <- "tmleExtract"
+    return(out)
+  }
+
   g1w <- tmle_fit$g$g1W
   g0w <- 1 - g1w
   Q1W <- tmle_fit$Qstar[, 2]

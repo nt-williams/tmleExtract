@@ -3,7 +3,7 @@
 
 # tmleExtract
 
-The goal of `tmleExtract` is to extract parameter estimtes from TMLE
+The goal of `tmleExtract` is to extract parameter estimates from TMLE
 fits produced by the
 [`tmle`](https://cran.r-project.org/web/packages/tmle/index.html)
 package in a tidy format.
