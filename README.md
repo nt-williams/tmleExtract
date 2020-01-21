@@ -3,9 +3,10 @@
 
 # tmleExtract
 
-The goal of tmleExtract is to extract treatment specific mean estimates
-(and the ATE) from TMLE fits produced by the *tmle* package in a tidy
-format.
+The goal of `tmleExtract` is to extract parameter estimtes from TMLE
+fits produced by the
+[`tmle`](https://cran.r-project.org/web/packages/tmle/index.html)
+package in a tidy format.
 
 ## Installation
 
@@ -33,8 +34,12 @@ tmle_extract(tmle_fit, A, Y)
 #> 1       Q1W 2.081951 0.05366308      0.2316529 8.987370 2.532171e-19
 #> 2       Q0W 1.066229 0.05208988      0.2282321 4.671688 2.987347e-06
 #> 3       ATE 1.015722 0.06779690      0.2603784 3.900945 9.581804e-05
+#> 4       ATT 1.009826 0.07016059      0.2648784 3.812414 1.376163e-04
+#> 5       ATC 1.030625 0.06696742      0.2587806 3.982619 6.815996e-05
 #>    conf.low conf.high
 #> 1 1.6279192  2.535982
 #> 2 0.6189024  1.513556
 #> 3 0.5053894  1.526054
+#> 4 0.4906645  1.528988
+#> 5 0.5234146  1.537835
 ```
