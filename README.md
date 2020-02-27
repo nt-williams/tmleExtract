@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+**`tmleExtract` is no longer under active development and has merged with [`tmleplus`](https://github.com/hoffmakl/tmleplus)**
+
 # tmleExtract
 
 The goal of `tmleExtract` is to extract parameter estimates from TMLE
